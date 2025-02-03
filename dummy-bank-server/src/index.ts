@@ -11,4 +11,4 @@ const PORT = process.env.PORT;
 
 app.use("/api/v1", walletRouter);
 
-app.listen(PORT, () => console.log(`Server live at PORT ${PORT}`));
+app.listen(PORT, () => console.log(`Main bank server live at PORT ${PORT}`));
