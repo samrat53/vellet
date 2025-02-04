@@ -5,6 +5,10 @@ import { ExtendedRequest } from "./config/types";
 
 const verifyAccountNumber = async (req: ExtendedRequest, res: Response, next:NextFunction) => {
     const accountNum = Number(req.params.id);
+    if(!accountNum) {
+        res.status(401).json({message: "Invalid account Number"});
+        return;
+    }
     try {
         const id = await prisma.user.findFirst({
             where: {
