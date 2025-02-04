@@ -13,10 +13,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum TxnStatus {
+  success
+  failed 
+  pending
+}
+enum TxnType {
+  credit
+  debit
+}
+
 model User {
   accountNum Int @id @default(autoincrement())
   email String @unique
   phone String @unique
-  Name String
+  name String
   balance Int
+  transactions Transactions[] // one to many: one user may have many transactions
+}
+
+model Transactions {
+  txnId Int @id @default(autoincrement())
+  accountId Int
+  status TxnStatus @default(pending)
+  ammount Int
+  type TxnType
+  user User @relation(fields: [accountId], references: [accountNum])
 }
