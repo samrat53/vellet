@@ -13,10 +13,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum TxnType {
+  credit
+  debit
+}
 
 model User {
-  userId Int @id @default(autoincrement())
+  accountNum Int @id @unique
   name String
   password String
-  email
+  email String
+  walletBalance Int
+  bankTxns BankTransactions[]
+  toUser PeerToPeerTxns[] @relation(name: "to user relation")
+  fromUser PeerToPeerTxns[] @relation(name: "from user relation")
+}
+
+model BankTransactions {
+  bankTxnIdByBank Int @id
+  accountNum Int
+  type TxnType
+  amount Int
+  time DateTime @default(now())
+  user User @relation(fields: [accountNum], references: [accountNum])
+}
+
+model PeerToPeerTxns {
+  txnId Int @id
+  from Int
+  to Int
+  amount Int
+  time DateTime @default(now())
+  FromUser User @relation(fields: [from], references: [accountNum], name: "from user relation")
+  ToUser User @relation(fields: [to], references: [accountNum], name: "to user relation")
 }
