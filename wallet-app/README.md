@@ -1,2 +1,1 @@
-## Getting Started
-Wallet App on Next Js
+Wallet App Under Development
