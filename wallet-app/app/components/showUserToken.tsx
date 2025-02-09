@@ -1,5 +1,5 @@
 "use client";
-import { getAccountNumber } from "@/actions/verifyUser";
+import { getAccountNumber } from "@/actions/getAccountNumber";
 import { useSession } from "next-auth/react";
 
 export default function ShowDetails() {
