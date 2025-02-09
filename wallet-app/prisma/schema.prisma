@@ -23,7 +23,7 @@ model User {
   name String
   password String
   email String
-  walletBalance Int
+  walletBalance Int @default(0)
   bankTxns BankTransactions[]
   toUser PeerToPeerTxns[] @relation(name: "to user relation")
   fromUser PeerToPeerTxns[] @relation(name: "from user relation")
