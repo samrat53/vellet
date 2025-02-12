@@ -1,11 +1,12 @@
-"use client";
+// "use client";
 import ShowDetails from "./components/showUserToken";
 import { LogoutButton, SigninButton } from "./components/signin_logout_buttons";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import P2PTransfer from "./components/testing/transfers";
+import WalletBalance from "./components/testing/getBalance";
 
 export default function Home() {
-  const session = useSession();
+  // const session = useSession();  // use in client only
   return (
     <div>
       Main page
@@ -15,6 +16,9 @@ export default function Home() {
       <br />
       <br />
       <P2PTransfer/>
+      <br />
+      <br />
+      <WalletBalance/>
     </div>
   );
 }

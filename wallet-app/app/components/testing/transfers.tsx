@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { p2pTransfer } from "@/actions/p2ptransfers";
 
