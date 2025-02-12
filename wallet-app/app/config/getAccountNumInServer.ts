@@ -1,8 +1,7 @@
-'use server'
 import { NEXT_AUTH_CONFIG } from "@/app/config/auth";
 import { getServerSession } from "next-auth";
 
-export async function getAccountNumber() {
+export async function accountNumFromCookie() {
     const session = await getServerSession(NEXT_AUTH_CONFIG);
-    console.log(session);
+    return session.user.accountNum;;
 }

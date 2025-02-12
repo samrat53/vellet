@@ -48,7 +48,7 @@ export const NEXT_AUTH_CONFIG = {
     callbacks: {
         jwt: async ({ token, user }: any) => {
             token.accountNum = Number(token.sub);
-            console.log(token);
+            // console.log(token);
             return token;
         },
         session: ({session, token, user}: any)=> {

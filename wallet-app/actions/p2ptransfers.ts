@@ -1,13 +1,12 @@
 "use server";
 
-import { NEXT_AUTH_CONFIG } from "@/app/config/auth";
+import { accountNumFromCookie } from "@/app/config/getAccountNumInServer";
 import prisma from "@/db";
-import { getServerSession } from "next-auth";
 
 export const p2pTransfer = async(toAccountNumber: number, amount: number) => {
-    const session = await getServerSession(NEXT_AUTH_CONFIG);
-    const fromAccountNumber = session.user.accountNum;
+    const fromAccountNumber = await accountNumFromCookie();
     console.log(toAccountNumber, "TO account number")
+    
     //checks
     try {
         const fromUser = await prisma.user.findUnique({

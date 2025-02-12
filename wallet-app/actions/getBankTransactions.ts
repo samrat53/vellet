@@ -1,12 +1,11 @@
 "use server";
 
-import { NEXT_AUTH_CONFIG } from "@/app/config/auth";
+import { accountNumFromCookie } from "@/app/config/getAccountNumInServer";
 import prisma from "@/db";
-import { getServerSession } from "next-auth";
+
 
 export const getBankTransactions = async() => {
-    const session = await getServerSession(NEXT_AUTH_CONFIG);
-    const accountNumber = session.user.accountNum;
+    const accountNumber = await accountNumFromCookie();
     const userTxns = await prisma.bankTransactions.findMany({
         where: {
             accountNum: accountNumber

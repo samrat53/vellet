@@ -4,6 +4,7 @@ import { LogoutButton, SigninButton } from "./components/signin_logout_buttons";
 // import { useSession } from "next-auth/react";
 import P2PTransfer from "./components/testing/transfers";
 import WalletBalance from "./components/testing/getBalance";
+import TrasnferWithBank from "./components/testing/bankMoneyTxn";
 
 export default function Home() {
   // const session = useSession();  // use in client only
@@ -19,6 +20,10 @@ export default function Home() {
       <br />
       <br />
       <WalletBalance/>
+      <br />
+      <br />
+      <div>money transfer from bank</div>
+      <TrasnferWithBank/>
     </div>
   );
 }
