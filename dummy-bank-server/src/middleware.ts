@@ -1,8 +1,6 @@
 import { NextFunction, Response } from "express";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
 import { ExtendedRequest } from "./config/types";
-
+import prisma from "./db";
 const verifyAccountNumber = async (req: ExtendedRequest, res: Response, next:NextFunction) => {
     const accountNum = Number(req.params.id);
     if(!accountNum) {

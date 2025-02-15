@@ -9,3 +9,5 @@ export interface PayloadType {
     res: Response,
     next: NextFunction
 }
+
+export type txnType = "credit" | "debit";

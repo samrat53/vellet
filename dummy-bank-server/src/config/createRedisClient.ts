@@ -10,7 +10,7 @@ const createRedisClient = () => {
         console.log(`Redis connection error: ${err}`);
     });
 
-    console.log('connected to redis server');
+    console.log('Connected to redis server');
     return redis;
 };
 
