@@ -1,11 +1,9 @@
 "use server";
 
-import { accountNumFromCookie } from "@/app/config/getAccountNumInServer";
 import { txnType } from "@/app/config/types";
 import prisma from "@/db";
 
-export const updateUserBalance = async(type: txnType, amount: number) => {
-    const accountNum = await accountNumFromCookie();
+export const updateUserBalance = async(type: txnType, amount: number, accountNum: number) => {
     
     if(type === "credit") {
         await prisma.user.update({

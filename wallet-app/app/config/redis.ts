@@ -1,6 +1,7 @@
+import { retriedTxns } from "@/actions/processRetriedTxns";
 import Redis from "ioredis";
 
-const createRedisClient = () => {
+export const getRedisClient = () => {
     const redis = new Redis({
         host: process.env.REDIS_HOST || "localhost",
         port: Number(process.env.REDIS_PORT) || 6379,
@@ -12,10 +13,9 @@ const createRedisClient = () => {
     console.log('connected to redis server');
     return redis;
 };
-let redisCLient: Redis;
-
-export function getRedisClient() {
-    if(!redisCLient) redisCLient = createRedisClient();
-    return redisCLient;
-};
+// export function getRedisClient() {
+//     if(!redisCLient) redisCLient = createRedisClient();
+//     return redisCLient;
+// };
 getRedisClient();
+retriedTxns();

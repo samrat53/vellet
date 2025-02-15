@@ -6,7 +6,8 @@ import { useState } from "react";
 export default function TrasnferWithBank() {
     const [message, setMessage] = useState("");
     const handleTransfer = async () => {
-        const response = await bankTransfers(4000, "debit");
+        const response = await bankTransfers(200, "credit");
+        console.log(response);
         setMessage(JSON.stringify(response));
     }
     return (

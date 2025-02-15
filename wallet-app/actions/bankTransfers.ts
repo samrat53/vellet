@@ -22,8 +22,8 @@ export const bankTransfers = async(amount: number, type: txnType) => {
         });
         console.log(response.data.message);
         if(response.status == 200) {
-            await updateUserBalance(type, amount);
-            await createNewBankTransaction(response.data.txnId, type, amount);
+            await updateUserBalance(type, amount, accountNum);
+            await createNewBankTransaction(response.data.txnId, type, amount, accountNum);
 
             return "Transfer done";
         }

@@ -3,5 +3,5 @@ import { getServerSession } from "next-auth";
 
 export async function accountNumFromCookie() {
     const session = await getServerSession(NEXT_AUTH_CONFIG);
-    return session.user.accountNum;;
+    return session.user.accountNum;
 }
