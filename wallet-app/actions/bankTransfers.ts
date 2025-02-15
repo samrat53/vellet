@@ -5,6 +5,7 @@ import axios from "axios";
 import { updateUserBalance } from "./updateUserBalance";
 import { createNewBankTransaction } from "./createNewBankTxn";
 import { accountNumFromCookie } from "@/app/config/getAccountNumInServer";
+import { getRedisClient } from "@/app/config/redis";
 const BANK_URL = process.env.BANK_SERVER;
 
 
@@ -21,8 +22,8 @@ export const bankTransfers = async(amount: number, type: txnType) => {
         });
         console.log(response.data.message);
         if(response.status == 200) {
-            updateUserBalance(type, amount);
-            createNewBankTransaction(response.data.txnId, type, amount);
+            await updateUserBalance(type, amount);
+            await createNewBankTransaction(response.data.txnId, type, amount);
 
             return "Transfer done";
         }
@@ -34,6 +35,8 @@ export const bankTransfers = async(amount: number, type: txnType) => {
             console.log("Bank server is down, pushing to Redis queue...");
             // Push to Redis queue for later processing
             
+            const redisCLient = getRedisClient();
+            await redisCLient.lpush("try_push", `hello from nextjs`)
             return "Bank server is down, transaction will be retried later.";
         } 
         else if (error.response) {
