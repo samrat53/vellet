@@ -1,5 +1,6 @@
 import prisma from "./db";
 import { txnType } from "./config/types";
+import { pushToNotificationsQueue } from "./notifications";
 export const createNewBankTransaction = async(amount: number, type: txnType, accountNum: number) =>{
     
     try {
@@ -39,6 +40,7 @@ export const createNewBankTransaction = async(amount: number, type: txnType, acc
                     select: { txnId: true, }
                 })
             ]);
+            pushToNotificationsQueue(amount, type, accountNum, transaction.txnId);
             return {
                 status: 200,
                 message: `Transfer successfull of amount ${amount} to wallet`,
@@ -71,6 +73,7 @@ export const createNewBankTransaction = async(amount: number, type: txnType, acc
                     select: { txnId: true, }
                 })
             ]);
+            pushToNotificationsQueue(amount, type, accountNum, transaction.txnId);
             return {
                 status: 200,
                 message: `Transfer successfull of amount ${amount} from bank`,
