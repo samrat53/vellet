@@ -5,7 +5,7 @@ import axios from "axios";
 import { updateUserBalance } from "./updateUserBalance";
 import { createNewBankTransaction } from "./createNewBankTxn";
 import { accountNumFromCookie } from "@/app/config/getAccountNumInServer";
-import { getRedisClient } from "@/app/config/redis";
+import { pushToBankQueue } from "./pushToRetryQueue";
 const BANK_URL = process.env.BANK_SERVER;
 
 
@@ -33,10 +33,9 @@ export const bankTransfers = async(amount: number, type: txnType) => {
 
         if (error.code === "ECONNREFUSED") {
             console.log("Bank server is down, pushing to Redis queue...");
-            // Push to Redis queue for later processing
             
-            const redisCLient = getRedisClient();
-            await redisCLient.lpush("try_push", `hello from nextjs`)
+            // Push to Redis queue for later processing
+            await pushToBankQueue(amount, type);
             return "Bank server is down, transaction will be retried later.";
         } 
         else if (error.response) {

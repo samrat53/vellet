@@ -18,3 +18,4 @@ export function getRedisClient() {
     if(!redisCLient) redisCLient = createRedisClient();
     return redisCLient;
 };
+getRedisClient();
