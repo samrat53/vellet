@@ -1,4 +1,5 @@
-import { getRedisClient } from "./createRedisClient"
+import { getRedisClient } from "../config/createRedisClient"
+
 
 const main = async() => {
     const redisCLient = getRedisClient();
@@ -7,8 +8,10 @@ const main = async() => {
             const item = await redisCLient.brpop("txn.walletToBank", 0);
             if(!item) continue;
             const[, txnData] = item;
-            const {amount, type} = JSON.parse(txnData);
+            const {amount, type, accountNum} = JSON.parse(txnData);
             console.log(`Processing transaction: amount = ${amount}, type = ${type}`);
+
+            
         } catch (error) {
             console.log("ERROR:", error);
         }
