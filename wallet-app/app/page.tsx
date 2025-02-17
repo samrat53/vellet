@@ -1,29 +1,13 @@
-// "use client";
-import ShowDetails from "./components/showUserToken";
-import { LogoutButton, SigninButton } from "./components/signin_logout_buttons";
-// import { useSession } from "next-auth/react";
-import P2PTransfer from "./components/testing/transfers";
-import WalletBalance from "./components/testing/getBalance";
-import TrasnferWithBank from "./components/testing/bankMoneyTxn";
+import { getServerSession } from "next-auth";
+import { NEXT_AUTH_CONFIG } from "./config/auth";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  // const session = useSession();  // use in client only
-  return (
-    <div>
-      Main page
-      <SigninButton/>
-      <LogoutButton/>
-      <ShowDetails/>
-      <br />
-      <br />
-      <P2PTransfer/>
-      <br />
-      <br />
-      <WalletBalance/>
-      <br />
-      <br />
-      <div>money transfer from bank</div>
-      <TrasnferWithBank/>
-    </div>
-  );
+export default async function Home() {
+  const session = await getServerSession(NEXT_AUTH_CONFIG);
+  if(session.user) {
+    redirect('/dashboard');
+  }
+  else {
+    redirect('/api/auth/signin')
+  }
 }
