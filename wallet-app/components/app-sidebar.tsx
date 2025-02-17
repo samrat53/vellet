@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Calendar, Home, Inbox, Search } from "lucide-react"
 
 import {
   Sidebar,
@@ -12,36 +12,29 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { useSession } from "next-auth/react"
-import { NEXT_AUTH_CONFIG } from "@/app/config/auth"
 import SidebarHeader from "./ui/sidebar-header"
 
 // Menu items.
 const items = [
   {
-    title: "Home",
-    url: "#",
+    title: "Dashboard",
+    url: "/dashboard",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
+    title: "Send to friend",
+    url: "/sendMoney",
     icon: Inbox,
   },
   {
-    title: "Calendar",
-    url: "#",
+    title: "Recharge Wallet",
+    url: "/recharge-wallet",
     icon: Calendar,
   },
   {
-    title: "Search",
-    url: "#",
+    title: "Recharge bank",
+    url: "/recharge-bank",
     icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
   },
 ]
 

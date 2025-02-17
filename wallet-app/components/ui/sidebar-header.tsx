@@ -20,7 +20,7 @@ export default function SidebarHeader() {
     return (
         <div>
             <h1>Name: {session?.user?.name}</h1>
-            <h2>Balance: {balance}</h2>
+            <h2>Wallet Balance: ₹ {balance}</h2>
         </div>
     );
 }
