@@ -1,8 +1,9 @@
-import ShowDetails from "@/app/components/showUserToken";
-import { LogoutButton, SigninButton } from "@/app/components/signin_logout_buttons";
-import TrasnferWithBank from "@/app/components/testing/bankMoneyTxn";
-import WalletBalance from "@/app/components/testing/getBalance";
-import P2PTransfer from "@/app/components/testing/transfers";
+// import ShowDetails from "@/app/components/showUserToken";
+import TrasnferWithBank from "@/components/testing/bankMoneyTxn";
+import WalletBalance from "@/components/testing/getBalance";
+import P2PTransfer from "@/components/testing/transfers";
+import ShowDetails from "@/components/showUserToken";
+import { LogoutButton, SigninButton } from "@/components/signin_logout_buttons";
 import { Button } from "@/components/ui/button";
 
 export default function () {

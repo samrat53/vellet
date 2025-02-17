@@ -1,6 +1,6 @@
 "use client";
+import { accountNumFromCookie } from "@/app/config/getAccountNumInServer";
 import { useSession } from "next-auth/react";
-import { accountNumFromCookie } from "../config/getAccountNumInServer";
 
 export default function ShowDetails() {
     const session = useSession();
