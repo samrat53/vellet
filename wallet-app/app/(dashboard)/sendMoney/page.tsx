@@ -11,18 +11,20 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { useState } from "react";
-  
+import { useEffect, useState } from "react";
+import { useToast } from "@/hooks/use-toast"
+
 
 export default function () {
     const [message, setMessage] = useState("");
     const [amount, setAmount] = useState<number>(-1);
     const [toAccountNum, setToAccountNum] = useState<number>(-1);
+    const { toast } = useToast()
 
     const handleTransfer = async () => {
         try {
             const response = await p2pTransfer(toAccountNum, amount);
-            setMessage(JSON.stringify(response));
+            setMessage((response));
         } catch (error) {
             // Type assertion for error
             if (error instanceof Error) {
@@ -32,6 +34,13 @@ export default function () {
             }
         }
     };
+
+    useEffect(()=> {
+        toast({
+            variant: message === "Transaction succesfull" ? "default" : "destructive" ,
+            title: message,
+        })
+    }, [message])
 
     return (
         <div className="">
@@ -52,39 +61,7 @@ export default function () {
                 </CardFooter>
             </Card>
         </div>
-        {message && <p>{message}</p>}
+        {/* {message && <p>{message}</p>} */}
         </div>
     )
 }
-
-{/*
-    "use client";
-    import { useState } from "react";
-    import { p2pTransfer } from "@/actions/p2ptransfers";
-    
-    export default function P2PTransfer() {
-        const [message, setMessage] = useState("");
-    
-        const handleTransfer = async () => {
-            try {
-                const response = await p2pTransfer(5, 100);
-                setMessage(JSON.stringify(response));
-            } catch (error) {
-                // Type assertion for error
-                if (error instanceof Error) {
-                    setMessage(`Error: ${error.message}`);
-                } else {
-                    setMessage("An unknown error occurred");
-                }
-            }
-        };
-    
-        return (
-            <div>
-                <button onClick={handleTransfer}>Send</button>
-                {message && <p>{message}</p>}
-            </div>
-        );
-    }
-     
-*/}
