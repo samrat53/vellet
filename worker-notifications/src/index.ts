@@ -1,5 +1,6 @@
 
 import Redis from "ioredis";
+import { sendEmail } from "./sendEmail";
 
 export const createRedisClient = () => {
     const redis = new Redis({
@@ -29,7 +30,8 @@ const main = async () => {
             if(!item) continue;
             const[, emailData] = item;
             const {amount, type, email, txnId, balance} = JSON.parse(emailData);
-            console.log(`Send email to ${email}, transaction: id = ${txnId}, current balance: ${balance}, amount of transfer: ${amount} of type: ${type}`);
+            await sendEmail({amount, type, email, txnId, balance});
+            console.log(`Sent email to ${email}, transaction: id = ${txnId}, current balance: ${balance}, amount of transfer: ${amount} of type: ${type}`);
             await new Promise(r => setTimeout(r, 2000));
         } catch (error) {
             console.log("ERROR: ", error);

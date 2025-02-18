@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 
 export default async function BankHistory() {
-    const history = await getBankTransactions(); // ✅ Call the server function here
+    const history = await getBankTransactions();
 
     return (
         <div>

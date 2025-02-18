@@ -28,6 +28,7 @@ export default function CreateBankTransaction({heading, description, label, type
     const { toast } = useToast()
 
     const handleTransfer = async () => {
+        setMessage("");
         try {
             const response = await bankTransfers(amount, type);
             setMessage(response ?? "");
@@ -42,10 +43,12 @@ export default function CreateBankTransaction({heading, description, label, type
     };
 
     useEffect(()=> {
-        toast({
-            variant: message === "Transfer done" ? "default" : "destructive" ,
-            title: message,
-        })
+        if(message !== "") {
+            toast({
+                variant: message === "Transfer done" ? "default" : "destructive" ,
+                title: message,
+            })
+        }
     }, [message])
 
     return (

@@ -5,6 +5,7 @@ import { Calendar, Home, Inbox, Search } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -13,6 +14,9 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import SidebarHeader from "./ui/sidebar-header"
+import { signOut } from "next-auth/react"
+import { Button } from "./ui/button"
+import { redirect } from "next/navigation"
 
 // Menu items.
 const items = [
@@ -39,6 +43,12 @@ const items = [
 ]
 
 export function AppSidebar() {
+
+  const handleSignout = async () => {
+    await signOut();
+    redirect('/api/auth/signin')
+  };
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -62,6 +72,9 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <Button onClick={handleSignout}>Sign Out</Button>
+      </SidebarFooter>
     </Sidebar>
   )
 }
