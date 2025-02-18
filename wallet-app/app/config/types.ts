@@ -1,6 +1,6 @@
 export type txnType = "credit" | "debit";
-    // type === "credit" means credit to bank (debit from wallet)
-    // type ==='debit means debit from bank
+    // type === "credit" means credit to bank - (recharge bank)
+    // type ==='debit means debit from bank - recharge wallet
 
 declare module "next-auth" {
     interface Session {
