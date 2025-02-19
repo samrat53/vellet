@@ -126,12 +126,15 @@ docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server:la
 ```bash
 cd wallet-app
 npx prisma generate
-npm run dev
+npx prisma migrate dev --name "init"
+npm run dev 
 ```
 
 #### **Start the Bank Server**  
 ```bash
 cd ../bank-server
+npx prisma generate
+npx prisma migrate dev --name "init"
 npm start server
 ```
 
