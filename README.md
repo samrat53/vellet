@@ -135,13 +135,13 @@ npm run dev
 cd ../bank-server
 npx prisma generate
 npx prisma migrate dev --name "init"
-npm start server
+npm run server
 ```
 
 #### **Start the Worker Service**  
 ```bash
 cd ../worker
-npm start worker
+npm run worker
 ```
 
 ---
@@ -179,13 +179,12 @@ npm start worker
 
 - **Reduced DB Calls**: Implemented **Redis-based LRU caching** in the bank server, reducing **DB queries by ~40%**.  
 - **High Availability**: Transactions **never fail due to server downtime** as they are **queued and processed later**.  
-- **Event-Driven Processing**: Instead of blocking API calls, all transactions **are handled asynchronously**.  
+- **Event-Driven Processing**: Instead of blocking API calls, all notifications **are handled asynchronously**.  
 
 ---
 
 ## 🧑‍💻 Future Enhancements  
 
-🔹 **WebSockets for Real-Time Updates** (Instead of polling for status updates).  
 🔹 **Multi-Currency Support** (Handle INR, USD, etc.).  
 🔹 **Fraud Detection System** (Detect unusual spending patterns).  
 🔹 **Rate Limiting & Security Hardening** (Prevent API abuse).  
